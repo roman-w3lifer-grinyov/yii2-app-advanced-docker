@@ -1,24 +1,28 @@
 <?php
 
-const PATH_TO_DB_CONFIG = 'config/db.php';
+const PATH_TO_DB_CONFIG = 'common/config/main-local.php';
 
 $config = file_get_contents(PATH_TO_DB_CONFIG);
 
-$config = preg_replace('/host=localhost/', 'host=mysql', $config);
-$config = preg_replace('/dbname=yii2basic/', 'dbname=' . getenv('MYSQL_DATABASE'), $config);
+$config = preg_replace('=host\=localhost=', 'host=mysql', $config);
+$config = preg_replace('=dbname\=yii2advanced=', 'dbname=' . getenv('MYSQL_DATABASE'), $config);
 
-$config = preg_replace("/'username' => 'root'/", "'username' => '" . getenv('MYSQL_USER') . "'", $config);
-$config = preg_replace("/'password' => ''/", "'password' => '" . getenv('MYSQL_PASSWORD') . "'", $config);
+$config = preg_replace("='username' \=> 'root'=", "'username' => '" . getenv('MYSQL_USER') . "'", $config);
+$config = preg_replace("='password' \=> ''=", "'password' => '" . getenv('MYSQL_PASSWORD') . "'", $config);
 
 file_put_contents(PATH_TO_DB_CONFIG, $config);
 
+// ---------------------------------------------------------------------------------------------------------------------
 
-const PATH_TO_WEB_CONFIG = 'config/web.php';
+uncommentUrlManager('frontend/config/mail.php');
+uncommentUrlManager('backend/config/mail.php');
 
-$config = file_get_contents(PATH_TO_WEB_CONFIG);
+function uncommentUrlManager(string $pathToConfig): void
+{
+    $config = file_get_contents($pathToConfig);
 
-// Uncommenting the "urlManager" component
-$config = preg_replace("=/\*\s+?(')=", '$1', $config);
-$config = preg_replace("=\s+?\*/=", '', $config);
+    $config = preg_replace("=/\*\s+?(')=", '$1', $config);
+    $config = preg_replace("=\s+?\*/=", '', $config);
 
-file_put_contents(PATH_TO_WEB_CONFIG, $config);
+    file_put_contents($pathToConfig, $config);
+}
