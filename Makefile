@@ -43,8 +43,7 @@ bash:
 
 __initialization: \
 	down up \
-	create-project \
-	change-config \
+	create-project change-config \
 	yii-migrate \
 	clear-initialization-files \
 	git-init \
