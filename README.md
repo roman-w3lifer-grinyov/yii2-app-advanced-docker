@@ -1,4 +1,4 @@
-# yii2-app-basic-docker-nginx-fpm-mysql
+# yii2-app-advanced-docker-nginx-fpm-mysql
 
 - [Initialization](#initialization)
 - [Initializing an existing project](#initializing-an-existing-project)
@@ -9,8 +9,8 @@
 > You can set environment variables in the [`.env`](.env) file
 
 ``` sh
-git clone https://github.com/w3lifer/yii2-app-basic-docker-nginx-fpm-mysql yii2-app-basic
-cd yii2-app-basic
+git clone https://github.com/w3lifer/yii2-app-advanced-docker-nginx-fpm-mysql yii2-app-advanced
+cd yii2-app-advanced
 make __initialization
 ```
 
@@ -25,7 +25,7 @@ git commit -m 'initial commit'
 git push -u origin master
 ```
 
-> To access the app, open http://localhost:801 in your favorite browser (see [`.env`](.env) file)
+> To access the app, open http://localhost:801 (front) and http://localhost:802 (back) in your favorite browser (see [`.env`](.env) file)
 
 ## Initializing an existing project
 
