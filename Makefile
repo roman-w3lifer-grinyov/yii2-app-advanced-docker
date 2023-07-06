@@ -45,9 +45,9 @@ __initialization: \
 	down up \
 	create-project change-config \
 	yii-migrate \
-#	clear-initialization-files \
-#	git-init \
-#	bash
+	clear-initialization-files \
+	git-init \
+	bash
 
 create-project:
 	docker compose exec php-fpm rm .gitkeep
