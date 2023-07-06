@@ -14,8 +14,8 @@ file_put_contents(PATH_TO_DB_CONFIG, $config);
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-uncommentUrlManager('frontend/config/mail.php');
-uncommentUrlManager('backend/config/mail.php');
+uncommentUrlManager('frontend/config/main.php');
+uncommentUrlManager('backend/config/main.php');
 
 function uncommentUrlManager(string $pathToConfig): void
 {
