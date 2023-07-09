@@ -4,6 +4,7 @@ default:
 __initialization-an-existing-project: \
 	up \
 	composer-i \
+	yii-init \
 	yii-migrate \
 	yii-cache-flush-all \
 	bash
@@ -12,7 +13,11 @@ start: \
 	down \
 	yii-migrate-down \
 	git-pull \
-	__initialization-an-existing-project
+	up \
+	composer-i \
+	yii-migrate \
+	yii-cache-flush-all \
+	bash
 
 up:
 	docker compose up -d --build --remove-orphans
@@ -26,6 +31,9 @@ git-pull:
 
 composer-i:
 	docker compose exec php-fpm composer i
+
+yii-init:
+	docker compose exec php-fpm php init
 
 yii-migrate:
 	docker compose exec php-fpm php yii migrate --interactive=0
