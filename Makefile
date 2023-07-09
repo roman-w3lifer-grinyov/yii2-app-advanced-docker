@@ -4,7 +4,7 @@ default:
 __initialization-an-existing-project: \
 	up \
 	composer-i \
-	yii-init \
+	__yii-init \
 	yii-migrate \
 	yii-cache-flush-all \
 	bash
@@ -32,7 +32,7 @@ git-pull:
 composer-i:
 	docker compose exec php-fpm composer i
 
-yii-init:
+__yii-init:
 	docker compose exec php-fpm php init --env=Development --overwrite=All --delete=All
 
 yii-migrate:
@@ -51,7 +51,7 @@ bash:
 
 __initialization: \
 	down up \
-	create-project yii-init change-config \
+	create-project __yii-init change-config \
 	yii-migrate \
 	clear-initialization-files \
 	git-init \
