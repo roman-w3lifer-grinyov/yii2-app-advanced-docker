@@ -4,7 +4,7 @@ default:
 __initialization-an-existing-project: \
 	up \
 	composer-i \
-	__yii-init \
+	__yii-init __change-config \
 	yii-migrate \
 	yii-cache-flush-all \
 	bash
@@ -32,9 +32,6 @@ git-pull:
 composer-i:
 	docker compose exec php-fpm composer i
 
-__yii-init:
-	docker compose exec php-fpm php init --env=Development --overwrite=All --delete=All
-
 yii-migrate:
 	docker compose exec php-fpm php yii migrate --interactive=0
 
@@ -47,11 +44,19 @@ yii-cache-flush-all:
 bash:
 	docker compose exec php-fpm bash
 
+__yii-init:
+	docker compose exec php-fpm php init --env=Development --overwrite=All --delete=All
+
+__change-config:
+	cp ./.docker/.helpers/change-config.php ./app
+	docker compose exec php-fpm php change-config.php
+	rm ./app/change-config.php
+
 # ----------------------------------------------------------------------------------------------------------------------
 
 __initialization: \
 	down up \
-	create-project __yii-init change-config \
+	create-project __yii-init __change-config \
 	yii-migrate \
 	clear-initialization-files \
 	git-init \
@@ -60,11 +65,6 @@ __initialization: \
 create-project:
 	docker compose exec php-fpm rm .gitkeep
 	docker compose exec php-fpm composer create-project --no-interaction --prefer-dist yiisoft/yii2-app-advanced .
-
-change-config:
-	cp ./.docker/.helpers/change-config.php ./app
-	docker compose exec php-fpm php change-config.php
-	rm ./app/change-config.php
 
 clear-initialization-files:
 	cp ./.docker/.helpers/clear-makefile.php ./app
