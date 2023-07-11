@@ -26,3 +26,16 @@ function uncommentUrlManager(string $pathToConfig): void
 
     file_put_contents($pathToConfig, $config);
 }
+// ---------------------------------------------------------------------------------------------------------------------
+
+addAllowedIPsToDebugModule('backend/config/main-local.php');
+addAllowedIPsToDebugModule('frontend/config/main-local.php');
+
+function addAllowedIPsToDebugModule(string $pathToConfig): void
+{
+    $config = file_get_contents($pathToConfig);
+
+    $config = preg_replace("=('class' \=> 'yii\\\debug\\\Module',)=", "$1\n        'allowedIPs' => ['*'],", $config);
+
+    file_put_contents($pathToConfig, $config);
+}
