@@ -25,7 +25,7 @@ git commit -m 'initial commit'
 git push -u origin master
 ```
 
-> To access the app, open http://localhost:801 (back) and http://localhost:802 (front) in your favorite browser (see [`.env`](.env) file)
+> To access the app, open http://localhost:800 (back) and http://localhost:809 (front) in your favorite browser (see [`.env`](.env) file)
 
 ## Initializing an existing project
 
