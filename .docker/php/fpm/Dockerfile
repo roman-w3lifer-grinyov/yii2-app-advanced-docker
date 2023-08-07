@@ -1,4 +1,4 @@
-FROM php:8.2.7-fpm
+FROM php:8.2.8-fpm
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y unzip
 
